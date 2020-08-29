@@ -4,10 +4,10 @@
     "node": true
   },
   "extends": [
-    "airbnb-base", 
+    "airbnb-base",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"    
+    "plugin:prettier/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -19,7 +19,7 @@
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint", 
+    "@typescript-eslint",
     "prettier"
   ],
   "rules": {
@@ -30,7 +30,9 @@
         "ts": "never"
       }
     ],
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/camelcase": "off",
   },
   "settings": {
     "import/resolver": {
