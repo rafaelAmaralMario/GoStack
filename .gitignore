@@ -104,6 +104,7 @@ dist
 .tern-port
 
 
-tmp/
-temp/
 build/
+temp/
+tmp/*
+!tmp/.gitkeep
