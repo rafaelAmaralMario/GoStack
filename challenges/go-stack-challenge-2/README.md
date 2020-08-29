@@ -1,1 +1,0 @@
-# go-stack-challenge-2
