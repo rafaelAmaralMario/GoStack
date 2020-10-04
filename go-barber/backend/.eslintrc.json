@@ -36,7 +36,12 @@
     "@typescript-eslint/no-unused-vars": ["error", {
       "argsIgnorePattern": "_"
     }],
-    "no-console": "off"
+    "no-console": "off",
+    "camelcase": "off",
+    "@typescript-eslint/interface-name-prefix": ["error", {
+      "prefixWithI": "always"
+    }],
+    "no-useless-constructor": "off"
   },
   "settings": {
     "import/resolver": {

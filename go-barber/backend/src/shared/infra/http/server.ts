@@ -2,11 +2,12 @@ import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import 'express-async-errors';
-import routes from './shared/routes';
-import uploadConfig from './config/upload';
+import routes from '@shared/infra/http/routes';
+import uploadConfig from '@config/upload';
 
-import './database';
-import AppError from './errors/AppError';
+import AppError from '@shared/errors/AppError';
+import '@shared/infra/typeorm';
+import '@shared/container';
 
 const app = express();
 app.use(cors());
@@ -21,6 +22,8 @@ app.use(
         message: error.message,
       });
     }
+    console.log(error);
+
     return response.status(500).json({
       status: 'error',
       message: 'Internal Server Error',
