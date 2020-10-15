@@ -8,18 +8,23 @@ import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHa
 
 import AppError from '@shared/errors/AppError';
 
+let fakeUserRepository: FakeUsersRepository;
+let fakeHashProvider: FakeHashProvider;
+let authenticateUser: AuthenticateUserService;
+let createUser: CreateUserService;
+
 describe('AuthenticateUser', () => {
+  beforeEach(() => {
+    fakeUserRepository = new FakeUsersRepository();
+    fakeHashProvider = new FakeHashProvider();
+    authenticateUser = new AuthenticateUserService(
+      fakeUserRepository,
+      fakeHashProvider,
+    );
+    createUser = new CreateUserService(fakeUserRepository, fakeHashProvider);
+  });
+
   it('should be able to Authenticate the user', async () => {
-    const fakeUserRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-    const authenticateUser = new AuthenticateUserService(
-      fakeUserRepository,
-      fakeHashProvider,
-    );
-    const createUser = new CreateUserService(
-      fakeUserRepository,
-      fakeHashProvider,
-    );
     await createUser.execute({
       email: 'r@mail.com',
       name: 'test',
@@ -35,14 +40,6 @@ describe('AuthenticateUser', () => {
   });
 
   it('should not be able to Authenticate with non existing user', async () => {
-    const fakeUserRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-
-    const authenticateUser = new AuthenticateUserService(
-      fakeUserRepository,
-      fakeHashProvider,
-    );
-
     await expect(
       authenticateUser.execute({
         email: 'ra@mail.com',
@@ -52,17 +49,6 @@ describe('AuthenticateUser', () => {
   });
 
   it('should not be able to Authenticate with wrong password', async () => {
-    const fakeUserRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-
-    const authenticateUser = new AuthenticateUserService(
-      fakeUserRepository,
-      fakeHashProvider,
-    );
-    const createUser = new CreateUserService(
-      fakeUserRepository,
-      fakeHashProvider,
-    );
     await createUser.execute({
       email: 'r@mail.com',
       password: '123456',
